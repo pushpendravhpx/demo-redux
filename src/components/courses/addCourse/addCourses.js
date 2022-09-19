@@ -1,9 +1,17 @@
-import { Card, Form, Select, Input, Button } from "antd";
+import { Card, Form, Select, Input, Button, notification } from "antd";
 import React from "react";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {updateMarks} from "./../../../redux/reducers/course.reducer"
 
+
+const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: 'Success',
+      description:
+        'Marks Updated'
+    });
+  };
 let AddCourses = ()=>{
 
     let dispatch = useDispatch()
@@ -11,14 +19,14 @@ let AddCourses = ()=>{
 
     let formSubmitHandle = (values)=>{
         console.log(values)
-        // console.log(e.target.quarter.value)
-        // console.log(e.target.course.value)
-        // console.log(e.target.marks.value)
+        
+        
         dispatch(updateMarks({
             course: values.course,
             quarter: values.quarter,
             marks: values.marks
         }))
+        openNotificationWithIcon('success')
     }
 
     return <div>

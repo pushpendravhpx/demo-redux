@@ -33,6 +33,11 @@ const columns = [
       key: 'marks',
     },
     {
+      title: 'Grade',
+      dataIndex: 'grade',
+      key: 'grade',
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
@@ -71,7 +76,8 @@ const columns = [
                 key : String(i+1),
                 course: state.course,
                 quarter: courses[i].quarter,
-                marks: courses[i].marks
+                marks: courses[i].marks,
+                grade: courses[i].grade
             }
         }
         setTableData(newArr)
@@ -85,7 +91,8 @@ const columns = [
                 key : String(i+1),
                 course: state.course,
                 quarter: courses[i].quarter,
-                marks: courses[i].marks
+                marks: courses[i].marks,
+                grade: courses[i].grade
             }
         }
         setTableData(newArr)
