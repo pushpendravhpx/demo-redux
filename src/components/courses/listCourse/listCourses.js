@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import courses from "./../../../redux/store"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
-import {getAllCourses} from "./../../../redux/reducers/course.reducer"
+import {getAllCourses, selectCourse} from "./../../../redux/reducers/course.reducer"
 import { Card, Form, Select, Space, Table, Tag } from "antd"
 
 
@@ -14,6 +14,8 @@ let ListCourse = ()=>{
     })
     let [tableData, setTableData] = useState([])
     let stateValue = useSelector(getAllCourses);
+    let dispatch = useDispatch();
+
 
 const columns = [
     {
@@ -68,8 +70,8 @@ const columns = [
         
       }, [tableData])
       useEffect(()=>{
-
-        let courses = stateValue.courses[state.course];
+        console.log(stateValue)
+        let courses = stateValue.courses.courses[state.course];
         let newArr = Array(courses.length)
         for(let i=0; i < newArr.length; i++){
             newArr[i] = {
@@ -84,7 +86,7 @@ const columns = [
 
       },[state])
       useEffect(()=>{
-        let courses = stateValue.courses[state.course];
+        let courses = stateValue.courses.courses[state.course];
         let newArr = Array(courses.length)
         for(let i=0; i < newArr.length; i++){
             newArr[i] = {
@@ -103,6 +105,7 @@ const columns = [
             <Form initialValues={{course:"physics"}}>
                 <Form.Item label="Select Course Name" name={"course"}>
                     <Select name="course" id="course" onChange={(e)=>{
+                        dispatch(selectCourse(e))
                         setState(prev=>{
                             return {...prev, course:e}
                         })

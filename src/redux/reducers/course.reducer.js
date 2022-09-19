@@ -3,36 +3,39 @@ import { createSlice } from '@reduxjs/toolkit'
 const course = createSlice({
   name: 'course',
   initialState: {
-    "physics" : [
-      {quarter : 1, marks : 0, grade : 'F'},
-      {quarter : 2, marks : 0, grade : 'F'},
-      {quarter : 3, marks : 0, grade : 'F'},
-      {quarter : 4, marks : 0, grade : 'F'},
-    ],
-    "chemistry" : [
-      {quarter : 1, marks : 0, grade : 'F'},
-      {quarter : 2, marks : 0, grade : 'F'},
-      {quarter : 3, marks : 0, grade : 'F'},
-      {quarter : 4, marks : 0, grade : 'F'},
-    ],
-    "mathematics" : [
-      {quarter : 1, marks : 0, grade : 'F'},
-      {quarter : 2, marks : 0, grade : 'F'},
-      {quarter : 3, marks : 0, grade : 'F'},
-      {quarter : 4, marks : 0, grade : 'F'},
-    ],
-    "english" : [
-      {quarter : 1, marks : 0, grade : 'F'},
-      {quarter : 2, marks : 0, grade : 'F'},
-      {quarter : 3, marks : 0, grade : 'F'},
-      {quarter : 4, marks : 0, grade : 'F'},
-    ],
-    "computer" : [
-      {quarter : 1, marks : 0, grade : 'F'},
-      {quarter : 2, marks : 0, grade : 'F'},
-      {quarter : 3, marks : 0, grade : 'F'},
-      {quarter : 4, marks : 0, grade : 'F'},
-    ]
+    courseSelected:'physics',
+    courses:{
+      "physics" : [
+        {quarter : 1, marks : 0, grade : 'F'},
+        {quarter : 2, marks : 0, grade : 'F'},
+        {quarter : 3, marks : 0, grade : 'F'},
+        {quarter : 4, marks : 0, grade : 'F'},
+      ],
+      "chemistry" : [
+        {quarter : 1, marks : 0, grade : 'F'},
+        {quarter : 2, marks : 0, grade : 'F'},
+        {quarter : 3, marks : 0, grade : 'F'},
+        {quarter : 4, marks : 0, grade : 'F'},
+      ],
+      "mathematics" : [
+        {quarter : 1, marks : 0, grade : 'F'},
+        {quarter : 2, marks : 0, grade : 'F'},
+        {quarter : 3, marks : 0, grade : 'F'},
+        {quarter : 4, marks : 0, grade : 'F'},
+      ],
+      "english" : [
+        {quarter : 1, marks : 0, grade : 'F'},
+        {quarter : 2, marks : 0, grade : 'F'},
+        {quarter : 3, marks : 0, grade : 'F'},
+        {quarter : 4, marks : 0, grade : 'F'},
+      ],
+      "computer" : [
+        {quarter : 1, marks : 0, grade : 'F'},
+        {quarter : 2, marks : 0, grade : 'F'},
+        {quarter : 3, marks : 0, grade : 'F'},
+        {quarter : 4, marks : 0, grade : 'F'},
+      ]
+    }
   },
   reducers: {
     updateMarks(state, action) {
@@ -53,15 +56,15 @@ const course = createSlice({
             grade = 'F';
         }
 
-      state[action.payload.course].find(course=>{ return course.quarter == action.payload.quarter;}).marks = Number(action.payload.marks);
-      state[action.payload.course].find(course => course.quarter == action.payload.quarter).grade = grade;
+      state.courses[action.payload.course].find(course=>{ return course.quarter == action.payload.quarter;}).marks = Number(action.payload.marks);
+      state.courses[action.payload.course].find(course => course.quarter == action.payload.quarter).grade = grade;
     }, 
-    todoToggled(state, action) {
-      const todo = state.find(todo => todo.id === action.payload)
-      todo.completed = !todo.completed
+    selectCourse(state, action) {
+      console.log(action.payload)
+      state.courseSelected = action.payload;
     }
   }
 })
 export let getAllCourses = (state)=>state
-export const { updateMarks, todoToggled } = course.actions;
+export const { updateMarks, selectCourse } = course.actions;
 export default course.reducer

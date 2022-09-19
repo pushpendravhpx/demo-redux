@@ -17,7 +17,7 @@ function App() {
         title="Performance Visualizer "
         ghost={true}
         extra={[
-          <Button key="1">About Developer</Button>
+          <a href='https://pushpendrahpx.me'><Button key="1">About Developer</Button></a>
         ]}
       />
       <Row>
