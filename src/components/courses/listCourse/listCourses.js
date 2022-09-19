@@ -3,10 +3,8 @@ import courses from "./../../../redux/store"
 import { useDispatch, useSelector } from 'react-redux'
 
 
-import {getAllCourses, selectCourse} from "./../../../redux/reducers/course.reducer"
+import {getAllCourses, selectCourse, resetCourseQuarter} from "./../../../redux/reducers/course.reducer"
 import { Card, Form, Select, Space, Table, Tag } from "antd"
-
-
 
 let ListCourse = ()=>{
     let [state, setState] = useState({
@@ -17,6 +15,11 @@ let ListCourse = ()=>{
     let dispatch = useDispatch();
 
 
+
+  let ResetValue = (record)=>{
+      dispatch(resetCourseQuarter({course: record.course, quarter: record.quarter}));
+            
+  }
 const columns = [
     {
       title: 'Course',
@@ -42,11 +45,12 @@ const columns = [
     {
       title: 'Action',
       key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Reset</a>
-        </Space>
-      ),
+      render: (_, record) => {
+        
+        return <Space size="middle">
+        <a onClick={()=>ResetValue(record)}>Reset</a>
+      </Space>;
+      },
     },
   ];
 

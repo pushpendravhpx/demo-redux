@@ -62,9 +62,13 @@ const course = createSlice({
     selectCourse(state, action) {
       console.log(action.payload)
       state.courseSelected = action.payload;
+    },
+    resetCourseQuarter(state,action){
+      state.courses[action.payload.course].find(course=>course.quarter == action.payload.quarter).marks = 0;
+      state.courses[action.payload.course].find(course => course.quarter == action.payload.quarter).grade = 'F';
     }
   }
 })
 export let getAllCourses = (state)=>state
-export const { updateMarks, selectCourse } = course.actions;
+export const { updateMarks, selectCourse, resetCourseQuarter } = course.actions;
 export default course.reducer
